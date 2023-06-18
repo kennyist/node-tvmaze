@@ -4,15 +4,15 @@
 
 // Imports
 const url = require('url');
-const request = require('request-promise');
+const axios = require('axios').default;;
 
 // Default Vars
 const BASE_URL = 'api.tvmaze.com/';
 const VERSION = require('./package.json').version;
 const DEFAULT_OPTIONS = {
-  https: true,
+  https: false,
   header: {
-    'User-Agent': `node-tvmaze/${VERSION}`
+    'User-Agent': `Mozilla/5.0 (Node.js) Tvmaze/${VERSION}` 
   }
 }
 
@@ -692,9 +692,10 @@ const Tvmaze = {
    *        console.log(error);
    *      })
    */
-  sendRequest: function(path, options){
-    // Merg default options and user options
+  sendRequest : function(path, options){
+    // Merge default options and user options
     const opts = Object.assign({}, DEFAULT_OPTIONS, options);
+
     // Switch https/http based on user or default settings
     const base_url = (opts.https) ? ("https://" + BASE_URL) : ("http://" + BASE_URL);
 
@@ -707,21 +708,20 @@ const Tvmaze = {
     // Create Request options
     const requestOpts = {
       method: 'GET',
-      uri: requestUrl,
-      json: true,
+      url: requestUrl,
       headers: opts.header
     }
 
-    // Execture request and return promise
-    return new Promise(function (resolve, reject) {
-      request(requestOpts).then(response => {
-        resolve(response);
+    // Execute request and return promise
+    return axios(requestOpts)
+      .then(response => {
+        // axios encapsulates the response data within a data property, so return response.data
+        return response.data;
       })
       .catch(error => {
-        reject(error.error);
-      })
-    });
-  }
+        throw error;
+      });
+}
 }
 
 module.exports = Tvmaze;

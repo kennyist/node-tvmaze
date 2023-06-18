@@ -1,6 +1,6 @@
 const assert = require('assert');
 const expect = require("chai").expect;
-const request = require('request-promise');
+const axios = require('axios').default;
 const Tvmaze = require("../index");
 
 const BASE_URL = "https://api.tvmaze.com/";
@@ -18,11 +18,11 @@ describe('Search functionality', function() {
 		Tvmaze.search("firefly")
 		.then(response => {
 
-			requestOpts.uri = BASE_URL + "search/shows?q=firefly";
+			requestOpts.url = BASE_URL + "search/shows?q=firefly";
 
-			request(requestOpts)
+			axios(requestOpts)
 			.then(expected => {
-				expect(response).to.eql(expected);
+				expect(response).to.eql(expected.data);
 				done();
 			})
 			.catch(error => {
@@ -39,11 +39,11 @@ describe('Search functionality', function() {
 		Tvmaze.singleSearch("star vs the forces of evil")
 		.then(response => {
 
-			requestOpts.uri = BASE_URL + "singlesearch/shows?q=star vs the forces of evil";
+			requestOpts.url = BASE_URL + "singlesearch/shows?q=star vs the forces of evil";
 
-			request(requestOpts)
+			axios(requestOpts)
 			.then(expected => {
-				expect(response).to.eql(expected);
+				expect(response).to.eql(expected.data);
 				done();
 			})
 			.catch(error => {
@@ -60,11 +60,11 @@ describe('Search functionality', function() {
 		Tvmaze.singleSearch("star vs the forces of evil", ['episodes'])
 		.then(response => {
 
-			requestOpts.uri = BASE_URL + "singlesearch/shows?q=star vs the forces of evil&embed=episodes";
+			requestOpts.url = BASE_URL + "singlesearch/shows?q=star vs the forces of evil&embed=episodes";
 
-			request(requestOpts)
+			axios(requestOpts)
 			.then(expected => {
-				expect(response).to.eql(expected);
+				expect(response).to.eql(expected.data);
 				done();
 			})
 			.catch(error => {
@@ -81,11 +81,11 @@ describe('Search functionality', function() {
 		Tvmaze.searchPeople("stephen Colbert")
 		.then(response => {
 
-			requestOpts.uri = BASE_URL + "search/people?q=stephen Colbert";
+			requestOpts.url = BASE_URL + "search/people?q=stephen Colbert";
 
-			request(requestOpts)
+			axios(requestOpts)
 			.then(expected => {
-				expect(response).to.eql(expected);
+				expect(response).to.eql(expected.data);
 				done();
 			})
 			.catch(error => {
@@ -107,11 +107,11 @@ describe('Lookup functions', function() {
 		Tvmaze.lookup("imdb", "tt2758770")
 		.then(response => {
 
-			requestOpts.uri = BASE_URL + "lookup/shows?imdb=tt2758770";
+			requestOpts.url = BASE_URL + "lookup/shows?imdb=tt2758770";
 
-			request(requestOpts)
+			axios(requestOpts)
 			.then(expected => {
-				expect(response).to.eql(expected);
+				expect(response).to.eql(expected.data);
 				done();
 			})
 			.catch(error => {
@@ -128,11 +128,11 @@ describe('Lookup functions', function() {
 		Tvmaze.lookupThetvdb("270701")
 		.then(response => {
 
-			requestOpts.uri = BASE_URL + "lookup/shows?thetvdb=270701";
+			requestOpts.url = BASE_URL + "lookup/shows?thetvdb=270701";
 
-			request(requestOpts)
+			axios(requestOpts)
 			.then(expected => {
-				expect(response).to.eql(expected);
+				expect(response).to.eql(expected.data);
 				done();
 			})
 			.catch(error => {
@@ -149,11 +149,11 @@ describe('Lookup functions', function() {
 		Tvmaze.lookupImdb("tt3530232")
 		.then(response => {
 
-			requestOpts.uri = BASE_URL + "lookup/shows?imdb=tt3530232";
+			requestOpts.url = BASE_URL + "lookup/shows?imdb=tt3530232";
 
-			request(requestOpts)
+			axios(requestOpts)
 			.then(expected => {
-				expect(response).to.eql(expected);
+				expect(response).to.eql(expected.data);
 				done();
 			})
 			.catch(error => {
@@ -170,11 +170,11 @@ describe('Lookup functions', function() {
 		Tvmaze.lookupTvrage("24493")
 		.then(response => {
 
-			requestOpts.uri = BASE_URL + "lookup/shows?tvrage=24493";
+			requestOpts.url = BASE_URL + "lookup/shows?tvrage=24493";
 
-			request(requestOpts)
+			axios(requestOpts)
 			.then(expected => {
-				expect(response).to.eql(expected);
+				expect(response).to.eql(expected.data);
 				done();
 			})
 			.catch(error => {
@@ -196,11 +196,11 @@ describe('Show functions', function() {
 		Tvmaze.show(396)
 		.then(response => {
 
-			requestOpts.uri = BASE_URL + "shows/396";
+			requestOpts.url = BASE_URL + "shows/396";
 
-			request(requestOpts)
+			axios(requestOpts)
 			.then(expected => {
-				expect(response).to.eql(expected);
+				expect(response).to.eql(expected.data);
 				done();
 			})
 			.catch(error => {
@@ -217,11 +217,11 @@ describe('Show functions', function() {
 		Tvmaze.show(396, ['episodes'])
 		.then(response => {
 
-			requestOpts.uri = BASE_URL + "shows/396?embed=episodes";
+			requestOpts.url = BASE_URL + "shows/396?embed=episodes";
 
-			request(requestOpts)
+			axios(requestOpts)
 			.then(expected => {
-				expect(response).to.eql(expected);
+				expect(response).to.eql(expected.data);
 				done();
 			})
 			.catch(error => {
@@ -238,11 +238,11 @@ describe('Show functions', function() {
 		Tvmaze.episodes(396)
 		.then(response => {
 
-			requestOpts.uri = BASE_URL + "shows/396/episodes";
+			requestOpts.url = BASE_URL + "shows/396/episodes";
 
-			request(requestOpts)
+			axios(requestOpts)
 			.then(expected => {
-				expect(response).to.eql(expected);
+				expect(response).to.eql(expected.data);
 				done();
 			})
 			.catch(error => {
@@ -259,11 +259,11 @@ describe('Show functions', function() {
 		Tvmaze.episode(396, 1, 1)
 		.then(response => {
 
-			requestOpts.uri = BASE_URL + "shows/396/episodebynumber?season=1&number=1";
+			requestOpts.url = BASE_URL + "shows/396/episodebynumber?season=1&number=1";
 
-			request(requestOpts)
+			axios(requestOpts)
 			.then(expected => {
-				expect(response).to.eql(expected);
+				expect(response).to.eql(expected.data);
 				done();
 			})
 			.catch(error => {
@@ -280,11 +280,11 @@ describe('Show functions', function() {
 		Tvmaze.episodesByDate(321, "2019-03-15")
 		.then(response => {
 
-			requestOpts.uri = BASE_URL + "shows/321/episodesbydate?date=2019-03-15";
+			requestOpts.url = BASE_URL + "shows/321/episodesbydate?date=2019-03-15";
 
-			request(requestOpts)
+			axios(requestOpts)
 			.then(expected => {
-				expect(response).to.eql(expected);
+				expect(response).to.eql(expected.data);
 				done();
 			})
 			.catch(error => {
@@ -301,11 +301,11 @@ describe('Show functions', function() {
 		Tvmaze.seasons(321)
 		.then(response => {
 
-			requestOpts.uri = BASE_URL + "shows/321/seasons";
+			requestOpts.url = BASE_URL + "shows/321/seasons";
 
-			request(requestOpts)
+			axios(requestOpts)
 			.then(expected => {
-				expect(response).to.eql(expected);
+				expect(response).to.eql(expected.data);
 				done();
 			})
 			.catch(error => {
@@ -322,11 +322,11 @@ describe('Show functions', function() {
 		Tvmaze.seasonEpisodes(1)
 		.then(response => {
 
-			requestOpts.uri = BASE_URL + "seasons/1/episodes";
+			requestOpts.url = BASE_URL + "seasons/1/episodes";
 
-			request(requestOpts)
+			axios(requestOpts)
 			.then(expected => {
-				expect(response).to.eql(expected);
+				expect(response).to.eql(expected.data);
 				done();
 			})
 			.catch(error => {
@@ -343,11 +343,11 @@ describe('Show functions', function() {
 		Tvmaze.cast(174)
 		.then(response => {
 
-			requestOpts.uri = BASE_URL + "shows/174/cast";
+			requestOpts.url = BASE_URL + "shows/174/cast";
 
-			request(requestOpts)
+			axios(requestOpts)
 			.then(expected => {
-				expect(response).to.eql(expected);
+				expect(response).to.eql(expected.data);
 				done();
 			})
 			.catch(error => {
@@ -364,11 +364,11 @@ describe('Show functions', function() {
 		Tvmaze.crew(174)
 		.then(response => {
 
-			requestOpts.uri = BASE_URL + "shows/174/crew";
+			requestOpts.url = BASE_URL + "shows/174/crew";
 
-			request(requestOpts)
+			axios(requestOpts)
 			.then(expected => {
-				expect(response).to.eql(expected);
+				expect(response).to.eql(expected.data);
 				done();
 			})
 			.catch(error => {
@@ -385,11 +385,11 @@ describe('Show functions', function() {
 		Tvmaze.aliases(49)
 		.then(response => {
 
-			requestOpts.uri = BASE_URL + "shows/49/akas";
+			requestOpts.url = BASE_URL + "shows/49/akas";
 
-			request(requestOpts)
+			axios(requestOpts)
 			.then(expected => {
-				expect(response).to.eql(expected);
+				expect(response).to.eql(expected.data);
 				done();
 			})
 			.catch(error => {
@@ -406,11 +406,11 @@ describe('Show functions', function() {
 		Tvmaze.showsIndex(1)
 		.then(response => {
 
-			requestOpts.uri = BASE_URL + "shows?page=1";
+			requestOpts.url = BASE_URL + "shows?page=1";
 
-			request(requestOpts)
+			axios(requestOpts)
 			.then(expected => {
-				expect(response).to.eql(expected);
+				expect(response).to.eql(expected.data);
 				done();
 			})
 			.catch(error => {
@@ -427,11 +427,11 @@ describe('Show functions', function() {
 		Tvmaze.showUpdates()
 		.then(response => {
 
-			requestOpts.uri = BASE_URL + "updates/shows";
+			requestOpts.url = BASE_URL + "updates/shows";
 
-			request(requestOpts)
+			axios(requestOpts)
 			.then(expected => {
-				expect(response).to.eql(expected);
+				expect(response).to.eql(expected.data);
 				done();
 			})
 			.catch(error => {
@@ -452,11 +452,11 @@ describe('People functions', function() {
 		Tvmaze.person(37135)
 		.then(response => {
 
-			requestOpts.uri = BASE_URL + "people/37135";
+			requestOpts.url = BASE_URL + "people/37135";
 
-			request(requestOpts)
+			axios(requestOpts)
 			.then(expected => {
-				expect(response).to.eql(expected);
+				expect(response).to.eql(expected.data);
 				done();
 			})
 			.catch(error => {
@@ -473,11 +473,11 @@ describe('People functions', function() {
 		Tvmaze.person(37135, ['castcredits'])
 		.then(response => {
 
-			requestOpts.uri = BASE_URL + "people/37135?embed=castcredits";
+			requestOpts.url = BASE_URL + "people/37135?embed=castcredits";
 
-			request(requestOpts)
+			axios(requestOpts)
 			.then(expected => {
-				expect(response).to.eql(expected);
+				expect(response).to.eql(expected.data);
 				done();
 			})
 			.catch(error => {
@@ -494,11 +494,11 @@ describe('People functions', function() {
 		Tvmaze.personCastCredits(37135)
 		.then(response => {
 
-			requestOpts.uri = BASE_URL + "people/37135/castcredits";
+			requestOpts.url = BASE_URL + "people/37135/castcredits";
 
-			request(requestOpts)
+			axios(requestOpts)
 			.then(expected => {
-				expect(response).to.eql(expected);
+				expect(response).to.eql(expected.data);
 				done();
 			})
 			.catch(error => {
@@ -515,11 +515,11 @@ describe('People functions', function() {
 		Tvmaze.personCrewCredits(37135)
 		.then(response => {
 
-			requestOpts.uri = BASE_URL + "people/37135/crewcredits";
+			requestOpts.url = BASE_URL + "people/37135/crewcredits";
 
-			request(requestOpts)
+			axios(requestOpts)
 			.then(expected => {
-				expect(response).to.eql(expected);
+				expect(response).to.eql(expected.data);
 				done();
 			})
 			.catch(error => {
@@ -542,11 +542,11 @@ describe('Schedule functions', function() {
 		Tvmaze.schedule("GB", "2019-03-23")
 		.then(response => {
 
-			requestOpts.uri = BASE_URL + "schedule?countrycode=GB&date=2019-03-23";
+			requestOpts.url = BASE_URL + "schedule?countrycode=GB&date=2019-03-23";
 
-			request(requestOpts)
+			axios(requestOpts)
 			.then(expected => {
-				expect(response).to.eql(expected);
+				expect(response).to.eql(expected.data);
 				done();
 			})
 			.catch(error => {
@@ -565,11 +565,12 @@ describe('Schedule functions', function() {
 		Tvmaze.fullSchedule()
 		.then(response => {
 
-			requestOpts.uri = BASE_URL + "schedule/full";
+			requestOpts.url = BASE_URL + "schedule/full";
 
-			request(requestOpts)
+			axios(requestOpts)
 			.then(expected => {
-				expect(response).to.eql(expected);
+				
+				expect(response).to.eql(expected.data);
 				done();
 			})
 			.catch(error => {
